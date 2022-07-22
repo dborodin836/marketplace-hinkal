@@ -1,12 +1,15 @@
 from rest_framework import mixins, viewsets
-from rest_framework.permissions import AllowAny, DjangoModelPermissionsOrAnonReadOnly, IsAdminUser
+from rest_framework.permissions import (
+    AllowAny,
+    DjangoModelPermissionsOrAnonReadOnly,
+    IsAdminUser,
+)
 from rest_framework.response import Response
-
 from src.apps.core.permissions import Author
 from src.apps.goods.api.serializers import (
+    DishCreateSerializer,
     DishDetailSerializer,
     DishListSerializer,
-    DishCreateSerializer,
 )
 from src.apps.goods.models import Dish
 
@@ -17,13 +20,18 @@ class DishViewSet(viewsets.ModelViewSet):
     """
 
     queryset = Dish.objects.all()
-    permission_classes = ((IsAdminUser | Author) & DjangoModelPermissionsOrAnonReadOnly,)
+    permission_classes = (
+        (IsAdminUser | Author) & DjangoModelPermissionsOrAnonReadOnly,
+    )
 
     def create(self, request, *args, **kwargs):
         """
         Verify that the POST has the request user as the obj.author
         """
-        if request.data["added_by"] == str(request.user.id) or request.user.is_superuser:
+        if (
+            request.data["added_by"] == str(request.user.id)
+            or request.user.is_superuser
+        ):
             serializer = self.get_serializer(data=request.data)
             serializer.is_valid(raise_exception=True)
             self.perform_create(serializer)
@@ -53,7 +61,9 @@ class DishViewSet(viewsets.ModelViewSet):
             queryset = queryset.filter(pk__in=self.request.GET.get("id").split(","))
 
         if self.request.GET.get("query_keyword"):
-            queryset = queryset.filter(title__icontains=self.request.GET.get("query_keyword"))
+            queryset = queryset.filter(
+                title__icontains=self.request.GET.get("query_keyword")
+            )
 
         if self.request.GET.get("filtered_category"):
             queryset = queryset.filter(
@@ -61,7 +71,9 @@ class DishViewSet(viewsets.ModelViewSet):
             )
 
         if self.request.GET.get("ordering"):
-            queryset = queryset.order_by(self.ORDERING_DICT[self.request.GET.get("ordering")])
+            queryset = queryset.order_by(
+                self.ORDERING_DICT[self.request.GET.get("ordering")]
+            )
         return queryset
 
 
