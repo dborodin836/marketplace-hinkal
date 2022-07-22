@@ -5,7 +5,6 @@ from typing import Sequence
 
 import pytz
 from django.core.management.base import BaseCommand
-
 from src.apps.contact.models import Contact
 from src.apps.goods.models import Dish
 from src.apps.orders.models import Discount, Order, OrderItem
@@ -81,7 +80,9 @@ class Command(BaseCommand):
         "Picassa",
     )
 
-    HINKALI_EXTRA = ("Hinkali from " + country.fullname for country in Country.objects.all())
+    HINKALI_EXTRA = (
+        "Hinkali from " + country.fullname for country in Country.objects.all()
+    )
 
     DISHES_NAME_SAMPLES = [
         "Borsch",
@@ -104,7 +105,11 @@ class Command(BaseCommand):
     @staticmethod
     def _get_username(full_name: str) -> str:
         plain_name = "".join(full_name.split())
-        return plain_name[: randint(6, len(plain_name) - 1)] + "_" + str(randint(1000, 9999))
+        return (
+            plain_name[: randint(6, len(plain_name) - 1)]
+            + "_"
+            + str(randint(1000, 9999))
+        )
 
     @staticmethod
     @sample_data_generator
