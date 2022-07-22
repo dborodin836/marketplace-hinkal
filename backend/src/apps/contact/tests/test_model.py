@@ -1,7 +1,7 @@
 import datetime
+
 import pytz
 from django.test.testcases import TestCase
-
 from src.apps.contact.models import Contact
 
 

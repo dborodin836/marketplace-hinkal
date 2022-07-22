@@ -1,14 +1,16 @@
 # mypy: ignore-errors
 import io
+from contextlib import redirect_stdout
 
 from django.core.management import call_command
 from rest_framework.test import APITestCase
-from contextlib import redirect_stdout
-
-from src.apps.core.testing.api_clients import CustomerAPIClient, AdminAPIClient, VendorAPIClient
-from src.apps.goods.models import Dish, Category
-
+from src.apps.core.testing.api_clients import (
+    AdminAPIClient,
+    CustomerAPIClient,
+    VendorAPIClient,
+)
 from src.apps.core.testing.factories import VendorFactory
+from src.apps.goods.models import Category, Dish
 
 
 class CustomerDishAPITest(APITestCase):
@@ -103,7 +105,11 @@ class CustomerDishAPITest(APITestCase):
         dish = Dish.objects.get(pk=self.dish.id)
         self.assertEqual(
             self.data,
-            {"title": dish.title, "price": float(dish.price), "added_by": dish.added_by.id},
+            {
+                "title": dish.title,
+                "price": float(dish.price),
+                "added_by": dish.added_by.id,
+            },
         )
 
     def test_creation_unauthorized(self):
@@ -138,7 +144,9 @@ class CustomerDishAPITest(APITestCase):
     def test_add_for_other_user(self):
         new_vendor = VendorFactory()
         new_vendor.save()
-        assert new_vendor.id != self.clientVendor.id, "This test require two different users."
+        assert (
+            new_vendor.id != self.clientVendor.id
+        ), "This test require two different users."
         data = {
             "title": "test1",
             "price": 699,

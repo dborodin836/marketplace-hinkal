@@ -28,6 +28,8 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="dish",
             name="is_active",
-            field=models.BooleanField(default=True, verbose_name="Available for users?"),
+            field=models.BooleanField(
+                default=True, verbose_name="Available for users?"
+            ),
         ),
     ]

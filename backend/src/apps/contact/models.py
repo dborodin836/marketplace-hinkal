@@ -1,5 +1,4 @@
 from django.db import models
-
 from src.apps.core.models import TimeStampedModelMixin
 
 

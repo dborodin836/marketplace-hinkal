@@ -1,5 +1,4 @@
 from django.core.management.base import BaseCommand
-
 from src.apps.contact.models import Contact
 from src.apps.goods.models import Dish
 from src.apps.orders.models import Discount, Order, OrderItem, OrderModifier

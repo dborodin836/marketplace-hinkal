@@ -1,15 +1,17 @@
+import logging
+
 from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
 from rest_framework.test import APIClient
-import logging
-
 from src.apps.user.models import Customer, Vendor
 
 logger = logging.getLogger("debug")
 
 
 class BaseUserAPIClient(APIClient):
-    def __init__(self, username: str, password: str, enforce_csrf_checks=False, **defaults):
+    def __init__(
+        self, username: str, password: str, enforce_csrf_checks=False, **defaults
+    ):
         super().__init__(enforce_csrf_checks, **defaults)
         self.username = username
         self.password = password
@@ -58,7 +60,9 @@ class AdminAPIClient(BaseUserAPIClient):
         """
         Creates regular user.
         """
-        self._user = User.objects.create(username=self.username, is_superuser=True, is_staff=True)
+        self._user = User.objects.create(
+            username=self.username, is_superuser=True, is_staff=True
+        )
         self._user.set_password(self.password)
         self._user.save()
 

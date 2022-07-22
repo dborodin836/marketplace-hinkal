@@ -1,7 +1,6 @@
 from datetime import datetime as dt
 
 from django.db import models
-
 from src.apps.goods.models import Dish
 from src.apps.user.models import Customer, Vendor
 
@@ -90,7 +89,9 @@ class OrderItem(models.Model):
 
     item = models.ForeignKey(Dish, on_delete=models.CASCADE, null=True)
     amount = models.PositiveIntegerField(default=1)
-    order = models.ForeignKey(Order, on_delete=models.CASCADE, null=True, related_name="details")
+    order = models.ForeignKey(
+        Order, on_delete=models.CASCADE, null=True, related_name="details"
+    )
 
     def __repr__(self):
         return f"OrderItem({repr(self.item)}, {self.amount}, {repr(self.order)})"

@@ -39,7 +39,9 @@ def get_env_file():
     environment = os.environ.get("ENV")
 
     if environment is None:
-        raise ImproperlyConfigured("'ENV' variable is missing. (DEV | PROD | TEST | DOCKER)")
+        raise ImproperlyConfigured(
+            "'ENV' variable is missing. (DEV | PROD | TEST | DOCKER)"
+        )
 
     environment = environment.upper()
 
