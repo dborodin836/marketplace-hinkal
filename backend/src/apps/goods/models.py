@@ -1,17 +1,26 @@
-from datetime import datetime as dt
-
 from django.contrib.auth.models import User
 from django.db import models
+from django.utils import timezone
 from mptt.fields import TreeForeignKey
 from mptt.models import MPTTModel
 
-from src.apps.user.models import Vendor
+from src.apps.goods.managers import DishManager
+
+
+class Category(models.Model):
+    """
+    Categories for products.
+    """
+
+    name = models.CharField(max_length=50)
 
 
 class Dish(models.Model):
     """
     Contains dishes added by Vendors.
     """
+
+    objects = DishManager()
 
     title = models.CharField(max_length=255, verbose_name="Title")
     description = models.TextField(verbose_name="Description", blank=True)
@@ -20,12 +29,18 @@ class Dish(models.Model):
         verbose_name="Image",
         default="default/not-found.png",
     )
-    added_date = models.DateTimeField(default=dt.now, verbose_name="Added")
-    added_by = models.ForeignKey(
-        Vendor, null=True, on_delete=models.CASCADE, verbose_name="Vendor"
-    )
+    added_date = models.DateTimeField(default=timezone.now, verbose_name="Added", null=True)
+    added_by = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Vendor")
     price = models.DecimalField(max_digits=8, decimal_places=2, verbose_name="Price")
     is_active = models.BooleanField(default=True, verbose_name="Available for users?")
+    times_bought = models.IntegerField(default=0, verbose_name="Times bought")
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
+
+    def __repr__(self):
+        return (
+            f"Dish({self.title}, {self.description}, {self.image}, {self.added_date}, "
+            f"{repr(self.added_by)}, {self.price}, {self.is_active}, {self.category})"
+        )
 
     def __str__(self):
         return self.title
@@ -45,9 +60,7 @@ class Comment(MPTTModel):
     """
 
     comment_text = models.TextField(blank=True, default="")
-    dish = models.ForeignKey(
-        Dish, related_name="comments", on_delete=models.CASCADE, null=True
-    )
+    dish = models.ForeignKey(Dish, related_name="comments", on_delete=models.CASCADE, null=True)
     parent = TreeForeignKey(
         "self",
         null=True,
@@ -61,6 +74,12 @@ class Comment(MPTTModel):
 
     class MPTTMeta:
         order_insertion_by = ["added_date"]
+
+    def __repr__(self):
+        return (
+            f"Comment({self.comment_text}, {repr(self.dish)}, {repr(self.parent)}, "
+            f"{self.added_date}, {repr(self.added_by)}) "
+        )
 
     def __str__(self):
         return f"Comment id-{self.id}"

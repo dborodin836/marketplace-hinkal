@@ -21,6 +21,12 @@ class Discount(models.Model):
     added_by = models.ForeignKey(Vendor, on_delete=models.CASCADE)
     is_active = models.BooleanField(default=False)
 
+    def __repr__(self):
+        return (
+            f"Discount({self.name}, {self.description}, {self.discount_word}, "
+            f"{self.discount_amount}, {repr(self.added_by)}, {self.is_active})"
+        )
+
     def __str__(self):
         return self.name if self.name else self.discount_word
 
@@ -36,22 +42,14 @@ class OrderModifier(models.Model):
     title = models.CharField(max_length=100)
     descriptions = models.CharField(max_length=255)
 
+    def __repr__(self):
+        return f"OrderModifier({self.title}, {self.descriptions})"
+
     def __str__(self):
         return self.title
 
 
-class TemporaryOrder(models.Model):
-    """
-    Contains order that wasn't passed to constructing service (physically constructed).
-    """
-
-    ordered_by = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
-
-    def __str__(self):
-        return f"Temporary order {self.id}"
-
-
-class Order(TemporaryOrder):
+class Order(models.Model):
     """
     Contains  order from user.
 
@@ -70,6 +68,13 @@ class Order(TemporaryOrder):
     discount = models.ForeignKey(Discount, on_delete=models.SET_NULL, null=True)
     modifier = models.ManyToManyField(OrderModifier, blank=True)
     status = models.CharField(choices=STATUS, default="new", max_length=200)
+    ordered_by = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
+
+    def __repr__(self):
+        return (
+            f"Order({self.comment}, {self.ordered_date}, {self.discount}, "
+            f"{repr(self.modifier)}, {self.status})"
+        )
 
     def __str__(self):
         return "Order " + str(self.id)
@@ -84,7 +89,10 @@ class OrderItem(models.Model):
 
     item = models.ForeignKey(Dish, on_delete=models.CASCADE, null=True)
     amount = models.PositiveIntegerField(default=1)
-    order = models.ForeignKey(TemporaryOrder, on_delete=models.CASCADE)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, null=True, related_name="details")
+
+    def __repr__(self):
+        return f"OrderItem({repr(self.item)}, {self.amount}, {repr(self.order)})"
 
     def __str__(self):
         return f"{self.item.title} ({self.amount})"

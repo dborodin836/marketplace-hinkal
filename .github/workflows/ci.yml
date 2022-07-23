@@ -1,16 +1,16 @@
-name: Python package
+name: CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master, develop, release ]
   pull_request:
-    branches: [ master ]
+    branches: [ master, develop, release ]
 jobs:
-  build:
+  Black_flake8_mypy:
+    name: Black flake8 mypy
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: [3.9]
+    env:
+      ENV: docker
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python
@@ -26,10 +26,77 @@ jobs:
         pip install -r backend/requirements_dev.txt
     - name: Run black
       run:
-        black --check backend/src/
+        black --check backend/src/ --line-length 99
     - name: Run flake8
       run: flake8 backend/src --config backend/tox.ini
     - name: Run Mypy
       run: |
         cd backend
         mypy src --config-file setup.cfg --no-incremental
+  TestingDB:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres
+
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: postgres
+          POSTGRES_DB: postgres
+
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
+    steps:
+      # run steps required in the workflow
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+
+      - name: Install dependencies
+        run: |
+          cd backend
+          pip install -r requirements.txt
+          pip install -r requirements_dev.txt
+
+      - name: migrate database
+        run: |
+          cd backend
+          python manage.py migrate
+        env:
+          ENV: TEST
+
+      - name: Run the mock tests function
+        run: |
+          cd backend
+          python manage.py test
+        env:
+          ENV: TEST
+  build:
+    name: Frontend Linting
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js 16
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16
+
+      - run: |
+          cd frontend
+          npm install --force
+      - run: |
+          cd frontend
+          npm run lint
+      - run: |
+          cd frontend
+          npx prettier src -c

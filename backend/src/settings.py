@@ -1,4 +1,6 @@
+import logging.config
 import os
+import sys
 from datetime import timedelta
 from pathlib import Path
 
@@ -23,11 +25,13 @@ INSTALLED_APPS = [
     "drf_yasg",
     "djoser",
     "rest_framework.authtoken",
+    "coverage",
     # Local Apps
     "src.apps.user",
     "src.apps.goods",
     "src.apps.orders",
     "src.apps.contact",
+    "src.apps.core",
 ]
 
 MIDDLEWARE = [
@@ -76,6 +80,31 @@ DATABASES = {
     }
 }
 
+# Covers regular testing and django-coverage
+if "test" in sys.argv or "test\_coverage" in sys.argv:
+    DATABASES["default"]["ENGINE"] = "django.db.backends.postgresql"
+    DATABASES["default"]["NAME"] = ":memory:"
+
+logging.config.dictConfig(
+    {
+        "version": 1,
+        "disable_existing_loggers": True,
+        "formatters": {
+            "main": {
+                "format": "%(asctime)s | %(levelname)s | %(module)s | %(filename)s | %(message)s"
+            }
+        },
+        "handlers": {
+            "console": {"class": "logging.StreamHandler", "formatter": "main"},
+            "file": {"class": "logging.FileHandler", "formatter": "main", "filename": "log.log"},
+        },
+        "loggers": {
+            "main": {"handlers": ["console", "file"], "level": "INFO", "propagate": True},
+            "debug": {"handlers": ["console"], "level": "DEBUG", "propagate": True},
+        },
+    }
+)
+
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -122,6 +151,7 @@ EMAIL_PORT = os.getenv("EMAIL_PORT")
 EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS")
+DEFAULT_FROM_EMAIL = "dborodin8362@outlook.com"
 
 # Rest framework settings
 REST_FRAMEWORK = {
@@ -144,9 +174,12 @@ CSRF_HEADER_NAME = "HTTP_X_XSRF_TOKEN"
 DJOSER = {
     "PASSWORD_RESET_CONFIRM_URL": "#/password/reset/confirm/{uid}/{token}",
     "USERNAME_RESET_CONFIRM_URL": "#/username/reset/confirm/{uid}/{token}",
-    "ACTIVATION_URL": "#/activate/{uid}/{token}",
+    "ACTIVATION_URL": "api/auth/users/activate/{uid}/{token}/",
     "SEND_ACTIVATION_EMAIL": True,
     "SERIALIZERS": {},
+    "PERMISSIONS": {
+        "user_create": ["rest_framework.permissions.AllowAny"],
+    },
 }
 
 SIMPLE_JWT = {

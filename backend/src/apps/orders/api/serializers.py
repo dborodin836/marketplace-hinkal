@@ -8,15 +8,33 @@ class OrderItemDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = OrderItem
-        fields = "__all__"
+        fields = ("id", "item", "amount", "order")
 
 
 class OrderDetailSerializer(serializers.ModelSerializer):
     """Detailed Order"""
 
+    details = OrderItemDetailSerializer(many=True)
+
+    def create(self, validated_data):
+        order_items = validated_data.pop("details")
+        order = Order.objects.create(**validated_data)
+        for item in order_items:
+            OrderItem.objects.create(order=order, **item)
+        return order
+
     class Meta:
         model = Order
-        fields = "__all__"
+        fields = (
+            "id",
+            "comment",
+            "ordered_date",
+            "discount",
+            "modifier",
+            "status",
+            "ordered_by",
+            "details",
+        )
 
 
 class DiscountDetailSerializer(serializers.ModelSerializer):
@@ -24,4 +42,12 @@ class DiscountDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Discount
-        fields = "__all__"
+        fields = (
+            "id",
+            "name",
+            "description",
+            "discount_word",
+            "discount_amount",
+            "added_by",
+            "is_active",
+        )

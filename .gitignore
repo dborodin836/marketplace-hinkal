@@ -14,12 +14,21 @@ __pycache__
 
 # Enviroment files
 /backend/local.env
+/backend/prod.env
 
 # Node modules
 node_modules
+
+# Coverage
+backend/htmlcov
+backend/.coverage
+backend/coverage.xml
 
 # Docker
 data
 
 # Frontend
 /frontend/dist/
+
+# Logs
+*.log
