@@ -7,5 +7,5 @@ COPY requirements.txt /code/
 RUN apt-get update &&\
     apt-get remove libpq5 &&\
     apt-get install -y libpq-dev &&\
-    pip install -r requirements.txt --no-cache-dir
+    pip install --no-cache-dir -r requirements.txt --no-cache-dir
 COPY . /code/
