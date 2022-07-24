@@ -6,6 +6,8 @@ WORKDIR /code
 COPY requirements.txt /code/
 RUN apt-get update &&\
     apt-get remove libpq5 &&\
-    apt-get install -y libpq-dev &&\
+    apt-get install --no-install-recommends -y libpq-dev && \
+    apt-get clean &&\
+    rm -rf /var/lib/apt/lists/* &&\
     pip install -r requirements.txt --no-cache-dir
 COPY . /code/
