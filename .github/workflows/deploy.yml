@@ -32,7 +32,7 @@ jobs:
           IMAGE_TAG: ${{ github.sha }}
         run: |
           cd backend
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -t $ECR_REGISTRY/$ECR_REPOSITORY:latest -f backend/Dockerfile.prod .
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -t $ECR_REGISTRY/$ECR_REPOSITORY:latest -f Dockerfile.prod .
           docker push -a $ECR_REGISTRY/$ECR_REPOSITORY
 
       - name: Build, tag, and push image to Amazon ECR Frontend
@@ -42,5 +42,5 @@ jobs:
           IMAGE_TAG: ${{ github.sha }}
         run: |
           cd frontend
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -t $ECR_REGISTRY/$ECR_REPOSITORY:latest -f frontend/Dockerfile .
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -t $ECR_REGISTRY/$ECR_REPOSITORY:latest -f Dockerfile .
           docker push -a $ECR_REGISTRY/$ECR_REPOSITORY
