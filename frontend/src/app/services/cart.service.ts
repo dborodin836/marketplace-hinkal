@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { DishService } from './dish.service';
 import { HttpClient } from '@angular/common/http';
 import { LoginService } from './login.service';
-import {HOST} from "../conf";
+import { HOST } from '../conf';
 
 const baseUrl = HOST + '/api/order/';
 

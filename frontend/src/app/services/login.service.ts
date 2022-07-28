@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { UserModel } from '../models/user.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import {HOST} from "../conf";
+import { HOST } from '../conf';
 
 const baseUrl = HOST + '/auth/';
 

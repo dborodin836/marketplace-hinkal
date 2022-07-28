@@ -37,10 +37,7 @@ class CommentAdmin(admin.ModelAdmin):
 
 
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = (
-        "id",
-        "name"
-    )
+    list_display = ("id", "name")
 
 
 admin.site.register(Dish, DishAdmin)
