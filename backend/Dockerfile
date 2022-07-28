@@ -11,3 +11,6 @@ RUN apt-get update &&\
     rm -rf /var/lib/apt/lists/* &&\
     pip install -r requirements.txt --no-cache-dir
 COPY . /code/
+EXPOSE 80
+ENV ENV="PROD"
+CMD ["gunicorn", "--bind", ":80", "--workers", "3", "src.wsgi", "--env", "DJANGO_SETTINGS_MODULE=src.settings"]
