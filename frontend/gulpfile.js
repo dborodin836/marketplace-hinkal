@@ -14,14 +14,14 @@ const postcssOverflowShorthand = require('postcss-overflow-shorthand');
     postcssOverflowShorthand()
   ];
 
-gulp.task('css', function () {
+gulp.task('css', () => {
   return gulp
     .src('./src/app/**/*.css')
     .pipe(postcss(postcssPlugins))
     .pipe(gulp.dest('./src/app'));
 });
 
-gulp.task('scss', function () {
+gulp.task('scss', () => {
   return gulp
     .src('./src/app/**/*.scss')
     .pipe(postcss(postcssPlugins))
