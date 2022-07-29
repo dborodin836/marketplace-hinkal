@@ -18,14 +18,14 @@ gulp.task('css', function () {
   return gulp
     .src('./src/app/**/*.css')
     .pipe(postcss(postcssPlugins))
-    .pipe(gulp.dest('./dest'));
+    .pipe(gulp.dest('./src/app'));
 });
 
 gulp.task('scss', function () {
   return gulp
     .src('./src/app/**/*.scss')
     .pipe(postcss(postcssPlugins))
-    .pipe(gulp.dest('./dest'));
+    .pipe(gulp.dest('./src/app'));
 });
 
 gulp.task('default', gulp.series('scss', 'css'))
