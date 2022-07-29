@@ -156,7 +156,7 @@ body {
 label {
   cursor: pointer;
   -webkit-user-select: none;
-          user-select: none;
+  user-select: none;
   text-decoration: none;
   display: inline-block;
   color: inherit;
@@ -190,7 +190,7 @@ label.nav {
   border-bottom: 2px solid #000;
   background: #303030;
   -webkit-user-select: none;
-          user-select: none;
+  user-select: none;
   transition: background 0.4s, padding-left 0.2s;
   padding-left: 0;
   input[type='radio']:checked + .page + & {
@@ -198,16 +198,16 @@ label.nav {
     color: #000;
     padding-left: 20px;
     span {
-    padding-left: 0px;
-    position: relative;
+      padding-left: 0px;
+      position: relative;
     }
     svg {
-    left: 0;
-    top: -3px;
-    position: absolute;
-    width: 15px;
-    opacity: 0;
-    transition: opacity 0.2s;
+      left: 0;
+      top: -3px;
+      position: absolute;
+      width: 15px;
+      opacity: 0;
+      transition: opacity 0.2s;
     }
   }
 }
@@ -230,8 +230,8 @@ label.nav {
       transition-delay: 0.2s + ($c * 0.2s);
     }
   }
-    opacity: 1;
-    transform: translateY(0px)
+  opacity: 1;
+  transform: translateY(0px);
 }
 
 input[type='radio'] + .page {
@@ -240,7 +240,7 @@ input[type='radio'] + .page {
 }
 
 input[type='radio']:checked + .page {
-  transform: translateX(0%)
+  transform: translateX(0%);
 }
 
 .page-contents {
