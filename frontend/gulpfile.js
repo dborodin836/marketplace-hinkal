@@ -4,26 +4,28 @@ const postcss_combine_duplicated_selectors = require('postcss-combine-duplicated
 const postcss_discard_duplicates = require('postcss-discard-duplicates');
 const postcssPresetEnv = require('postcss-preset-env');
 const autoprefixer = require('autoprefixer')
+const postcssOverflowShorthand = require('postcss-overflow-shorthand');
 
   const postcssPlugins = [
     postcss_combine_duplicated_selectors({}),
     postcss_discard_duplicates(),
     postcssPresetEnv(),
-    autoprefixer({})
+    autoprefixer({}),
+    postcssOverflowShorthand()
   ];
 
 gulp.task('css', function () {
   return gulp
     .src('./src/app/**/*.css')
     .pipe(postcss(postcssPlugins))
-    .pipe(gulp.dest('./dest'));
+    .pipe(gulp.dest('./src/app'));
 });
 
 gulp.task('scss', function () {
   return gulp
     .src('./src/app/**/*.scss')
     .pipe(postcss(postcssPlugins))
-    .pipe(gulp.dest('./dest'));
+    .pipe(gulp.dest('./src/app'));
 });
 
 gulp.task('default', gulp.series('scss', 'css'))
