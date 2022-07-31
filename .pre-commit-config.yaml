@@ -8,4 +8,4 @@ repos:
     rev: stable
     hooks:
     - id: black
-      arg: ["--line-length==99"]
+      arg: ["--line-length==99 --config backend/tox.ini"]
