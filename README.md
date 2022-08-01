@@ -27,7 +27,6 @@
 * [Built With](#built-with)
 * [Getting Started](#getting-started)
 * [Usage](#usage)
-* [Authors](#authors)
 
 ## About The Project
 
@@ -77,8 +76,4 @@ Alternatively, you can do setup manually following guides in specific folders.
 
 ## Usage
 
-*Screenshots and addition description, usage *
-
-## Authors
-
-* **Danil Borodin** - *Comp Sci Student* - [Danil Borodin](https://github.com/dborodin836/) - *All the work*
+* Screenshots and addition description, usage *
