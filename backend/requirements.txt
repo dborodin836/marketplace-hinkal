@@ -1,6 +1,5 @@
-asgiref==3.5.1
-coverage==6.4.2
-Django==4.0.6
+asgiref==3.5.2
+Django==4.1
 django-cors-headers==3.13.0
 django-mptt~=0.13.4
 djangorestframework==3.13.1
@@ -14,3 +13,10 @@ pytz==2022.1
 setuptools==63.2.0
 sqlparse==0.4.2
 tzdata==2022.1
+drf-yasg==1.21.3
+setuptools==63.4.3
+djoser==2.1.0
+django-mptt~=0.13.4
+coverage==6.4.3
+factory-boy==3.2.1
+gunicorn==20.1.0

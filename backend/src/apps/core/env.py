@@ -7,7 +7,7 @@ from django.core.exceptions import ImproperlyConfigured
 logger = logging.getLogger("main")
 
 
-def get_envs_from_file(env_file="local.env") -> None:
+def get_envs_from_file(file_name="local.env") -> None:
     """
     Open file and set the all env variables it contains.
 
@@ -20,7 +20,7 @@ def get_envs_from_file(env_file="local.env") -> None:
         DB_PASS=span_eggs       os.environ["DB_HOST"] = "foobar"
         ...
     """
-    with open(os.path.join(sys.path[0], env_file)) as env_file:
+    with open(os.path.join(sys.path[0], file_name)) as env_file:
         for line in env_file:
             if line.strip().startswith("#"):
                 continue
@@ -64,6 +64,10 @@ def get_env_file():
 
 
 def setup_env_vars():
+    """
+    Wrapper function tries to export all defined env vars.
+    If file doesn't exist throws exception.
+    """
     filename = get_env_file()
     try:
         get_envs_from_file(filename)
