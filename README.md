@@ -21,10 +21,10 @@
 
 ## Table Of Contents
 
-* [About the Project](#about-the-project)
-* [Built With](#built-with)
-* [Getting Started](#getting-started)
-* [Usage](#usage)
+- [About the Project](#about-the-project)
+- [Built With](#built-with)
+- [Getting Started](#getting-started)
+- [Usage](#usage)
 
 ## About The Project
 
@@ -76,4 +76,4 @@ Alternatively, you can do setup manually following guides in specific folders.
 
 ## Usage
 
-* Screenshots and addition description, usage *
+- Screenshots and addition description, usage \*
