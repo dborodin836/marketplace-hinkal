@@ -11,5 +11,5 @@ def increase_time_sold_dish(sender, instance: OrderItem, created, **kwargs):
     """
     if created:
         dish = instance.item
-        dish.times_bought += 1
-        dish.save()
+        dish.times_bought += 1  # type: ignore
+        dish.save()  # type: ignore

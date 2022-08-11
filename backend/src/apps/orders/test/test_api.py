@@ -1,3 +1,4 @@
+# mypy: ignore-errors
 import io
 from contextlib import redirect_stdout
 
