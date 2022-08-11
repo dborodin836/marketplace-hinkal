@@ -5,6 +5,7 @@ on:
     tags:
       - dev-**
 jobs:
+
   deploy:
     name: Build image
     runs-on: ubuntu-latest
