@@ -1,11 +1,5 @@
-repos:
-- repo: https://github.com/pre-commit/pre-commit-hooks
-  rev: v4.3.0
+- repo: https://github.com/psf/black
+  rev: stable
   hooks:
-    - id: requirements-txt-fixer
-    - id: end-of-file-fixer
--   repo: https://github.com/psf/black
-    rev: stable
-    hooks:
     - id: black
-      arg: ["--line-length==99 --config backend/tox.ini"]
+      args: ["backend/src", "--line-length", "99"]
