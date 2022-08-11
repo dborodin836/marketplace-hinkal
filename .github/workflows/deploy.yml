@@ -2,10 +2,9 @@ name: Deploy to Dev Production
 
 on:
   push:
-    branches: [ release ]
+    branches: [release]
 
 jobs:
-
   deploy:
     name: Build image
     runs-on: ubuntu-latest

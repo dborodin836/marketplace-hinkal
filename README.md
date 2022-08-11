@@ -19,15 +19,13 @@
 [![DeepSource](https://deepsource.io/gh/dborodin836/hinkali-store.svg/?label=active+issues&token=IHInroIWzClOi9afsigBuueu)](https://deepsource.io/gh/dborodin836/hinkali-store/?ref=repository-badge)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
-
-
 ## Table Of Contents
 
-* [About the Project](#about-the-project)
-* [Built With](#built-with)
-* [Getting Started](#getting-started)
-* [Usage](#usage)
-* [Authors](#authors)
+- [About the Project](#about-the-project)
+- [Built With](#built-with)
+- [Getting Started](#getting-started)
+- [Usage](#usage)
+- [Authors](#authors)
 
 ## About The Project
 
@@ -35,22 +33,24 @@
 
 Main features:
 
-* Ordering dishes with different modifiers (additional sauce etc.)
-* Custom users and vendors
-* Administration
+- Ordering dishes with different modifiers (additional sauce etc.)
+- Custom users and vendors
+- Administration
 
 I hope that site will be awesome soon :smile:
 
 ## Built With
 
-Frontend: 
-* [Angular](https://angular.io)
+Frontend:
+
+- [Angular](https://angular.io)
 
 Backend:
-* [Django](https://www.djangoproject.com)
-* [Django Rest Framework](https://www.django-rest-framework.org)
-* [PostgreSQL](https://www.postgresql.org)
-* [Pgbouncer](https://www.pgbouncer.org)
+
+- [Django](https://www.djangoproject.com)
+- [Django Rest Framework](https://www.django-rest-framework.org)
+- [PostgreSQL](https://www.postgresql.org)
+- [Pgbouncer](https://www.pgbouncer.org)
 
 ## Getting Started
 
@@ -77,8 +77,8 @@ Alternatively, you can do setup manually following guides in specific folders.
 
 ## Usage
 
-*Screenshots and addition description, usage *
+_Screenshots and addition description, usage _
 
 ## Authors
 
-* **Danil Borodin** - *Comp Sci Student* - [Danil Borodin](https://github.com/dborodin836/) - *All the work*
+- **Danil Borodin** - _Comp Sci Student_ - [Danil Borodin](https://github.com/dborodin836/) - _All the work_
