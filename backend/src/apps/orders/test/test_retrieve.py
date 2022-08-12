@@ -69,6 +69,3 @@ class OrderRetrieveAPITest(APITestCase):
         assert another_customer_client.id != self.customerClient.id, "Must be different users!"
         response2 = another_customer_client.get(self.base_url + str(response.data["id"]) + "/")
         self.assertIn(response2.status_code, [403, 401])
-
-    def test_pass(self):
-        pass
