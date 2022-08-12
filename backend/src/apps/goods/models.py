@@ -29,7 +29,6 @@ class Dish(TimeStampedAddedByModel):
         verbose_name="Image",
         default="default/not-found.png",
     )
-    added_by = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Vendor")
     price = models.DecimalField(max_digits=8, decimal_places=2, verbose_name="Price")
     is_active = models.BooleanField(default=True, verbose_name="Available for users?")
     times_bought = models.IntegerField(default=0, verbose_name="Times bought")
