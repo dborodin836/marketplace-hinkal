@@ -111,3 +111,22 @@ jobs:
       - run: |
           cd frontend
           npx prettier src -c
+
+  test:
+    name: Testin Frontend
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js 16
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16
+
+      - run: |
+          cd frontend
+          npm install --legacy-peer-deps
+
+      - run: |
+          cd frontend
+          ng test
