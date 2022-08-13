@@ -1,0 +1,9 @@
+test:
+  - frontend/src/app/**/*.spec.js
+    backend/src/apps/**/tests/
+
+backend:
+  - backend/
+
+frontend:
+  - frontend/
