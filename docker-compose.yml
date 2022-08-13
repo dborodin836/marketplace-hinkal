@@ -3,16 +3,20 @@ version: 3
 services:
   db:
     image: postgres
+    container_name: marketplace-hinkal-db
     volumes:
       - ./data/db:/var/lib/postgresql/data
+    env_file: backend/docker.env
     environment:
       - POSTGRES_DB=${POSTGRES_NAME}
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     ports:
       - '5432:5432'
+
   backend:
     build: backend/
+    container_name: marketplace-hinkal-backend
     command: bash -c "cd backend
       && python3 manage.py wait_for_db
       && python3 manage.py migrate
@@ -25,12 +29,19 @@ services:
     ports:
       - '8000:8000'
       - '80:4200'
+    env_file: backend/docker.env
     environment:
       - ENV=PROD
     depends_on:
       - pgbouncer
+
   pgbouncer:
     image: edoburu/pgbouncer
+    container_name: marketplace-hinkal-pgbouncer
+    restart: unless-stopped
+    ports:
+      - '6432:6432'
+    env_file: backend/docker.env
     environment:
       - DB_USER=${POSTGRES_USER}
       - DB_PASSWORD=${POSTGRES_PASSWORD}
@@ -41,18 +52,17 @@ services:
       - AUTH_TYPE=plain
       - POOL_MODE=transaction
       - ADMIN_USERS=postgres,dbuser
-    ports:
-      - '6432:6432'
-    restart: unless-stopped
     depends_on:
       - db
+
   frontend:
     build: frontend/
+    container_name: marketplace-hinkal-frontend
+    restart: unless-stopped
     volumes:
       - ./templates:/etc/nginx/templates
     ports:
       - '4200:80'
-    restart: unless-stopped
     environment:
       - NGINX_HOST=localhost
       - NGINX_PORT=80
