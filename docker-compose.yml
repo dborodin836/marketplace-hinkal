@@ -1,3 +1,5 @@
+version: 3
+
 services:
   db:
     image: postgres
@@ -17,6 +19,7 @@ services:
       && python3 manage.py loaddata fixtures/groups.json
       && python3 manage.py sadmin
       && python3 manage.py runserver 0.0.0.0:8000"
+    restart: unless-stopped
     volumes:
       - .:/code
     ports:
@@ -40,6 +43,7 @@ services:
       - ADMIN_USERS=postgres,dbuser
     ports:
       - '6432:6432'
+    restart: unless-stopped
     depends_on:
       - db
   frontend:
@@ -48,6 +52,7 @@ services:
       - ./templates:/etc/nginx/templates
     ports:
       - '4200:80'
+    restart: unless-stopped
     environment:
       - NGINX_HOST=localhost
       - NGINX_PORT=80
