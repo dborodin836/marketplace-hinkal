@@ -143,4 +143,9 @@ jobs:
       - name: Run tests
         run: |
           cd frontend
-          npm test
+          npm run test:gh
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          fail_ci_if_error: true
