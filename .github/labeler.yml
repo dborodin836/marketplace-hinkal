@@ -3,7 +3,24 @@ test:
     backend/src/apps/**/tests/
 
 backend:
-  - backend/
+  - backend/**/*
 
 frontend:
-  - frontend/
+  - frontend/**/*
+
+docker:
+  - backend/Dockerfile*
+  - frontend/Dockerfile*
+  - docker-compose*
+  - backend/.dockerignore
+  - frontend/.dockerignore
+
+git:
+  - .github/**/*
+  - .gitignore
+  - .gitattributes
+
+docs:
+  - LICENCE
+  - README.md
+  - backend/docs/*
