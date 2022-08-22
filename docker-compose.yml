@@ -1,4 +1,4 @@
-version: 3
+version: '3.4'
 
 services:
   db:
@@ -7,17 +7,15 @@ services:
     volumes:
       - ./data/db:/var/lib/postgresql/data
     env_file: backend/docker.env
-    environment:
-      - POSTGRES_DB=${POSTGRES_NAME}
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     ports:
       - '5432:5432'
     networks:
       - marketplace-hinkal-network
 
   backend:
-    build: backend/
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
     container_name: marketplace-hinkal-backend
     command: bash -c "cd backend
       && python3 manage.py wait_for_db
@@ -49,10 +47,7 @@ services:
       - marketplace-hinkal-network
     env_file: backend/docker.env
     environment:
-      - DB_USER=${POSTGRES_USER}
-      - DB_PASSWORD=${POSTGRES_PASSWORD}
       - DB_HOST=db
-      - DB_NAME=${POSTGRES_NAME}
       - DB_PORT=5432
       - LISTEN_PORT=6432
       - AUTH_TYPE=plain
@@ -62,7 +57,9 @@ services:
       - db
 
   frontend:
-    build: frontend/
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
     container_name: marketplace-hinkal-frontend
     restart: unless-stopped
     volumes:
