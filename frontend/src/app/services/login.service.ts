@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { UserModel } from '../models/user.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { environment } from '../../environments/environment';
-const baseUrl = environment.HOST + '/auth/';
+const baseUrl = `${environment.HOST}/auth/`;
 
 @Injectable({
   providedIn: 'root',
@@ -20,14 +20,14 @@ export class LoginService {
   }
 
   getAuthHeader() {
-    return new HttpHeaders({ Authorization: 'Token ' + this.getToken() });
+    return new HttpHeaders({ Authorization: `Token ${this.getToken()}` });
   }
 
   logout() {
     // @ts-ignore
     let promise = new Promise((resolve, reject) => {
       this.http
-        .post(baseUrl + 'token/logout/', '', { headers: this.getAuthHeader() })
+        .post(`${baseUrl}/logout/`, '', { headers: this.getAuthHeader() })
         .toPromise()
         .then(
           () => {
@@ -47,7 +47,7 @@ export class LoginService {
   login(data: { username: any; password: any }) {
     let promise = new Promise((resolve, reject) => {
       this.http
-        .post<any>(baseUrl + 'token/login/', data)
+        .post<any>(`${baseUrl}token/login/`, data)
         .toPromise()
         .then(
           (res) => {
@@ -74,7 +74,7 @@ export class LoginService {
 
   getUser() {
     let promise = new Promise((resolve, reject) => {
-      let url = baseUrl + 'users/me/';
+      let url = `${baseUrl}users/me/`;
       this.http
         .get(url, { observe: 'response', responseType: 'json', headers: this.getAuthHeader() })
         .toPromise()
