@@ -134,7 +134,7 @@ jobs:
       - name: Test Frontend
         run: curl --fail http://0.0.0.0:4200 || exit 1
       - name: Test Backend
-        run: curl --fail http://0.0.0.0:8000/admin/ || exit 1
+        run: curl --fail http://0.0.0.0:8000/api/dish/ || exit 1
 
   test-frontend:
     name: Testing Frontend
