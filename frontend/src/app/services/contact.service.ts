@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { UntypedFormGroup } from '@angular/forms';
 import { environment } from '../../environments/environment';
 
-const baseUrl = environment.HOST + '/api/contact/';
+const baseUrl = `${environment.HOST}/api/contact/`;
 const headers = new HttpHeaders({ Authorization: 'Token f8893cfcd3b0e4b4be269bb647678b1ffaa0c33c' });
 
 @Injectable({

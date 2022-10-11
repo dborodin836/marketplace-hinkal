@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { LoginService } from './login.service';
 import { environment } from '../../environments/environment';
 
-const baseUrl = environment.HOST + '/api/order/';
+const baseUrl = `${environment.HOST}/api/order/`;
 
 @Injectable({
   providedIn: 'root',
@@ -22,7 +22,7 @@ export class CartService {
       amount: 1,
     });
 
-    console.log('Added item w/ id:' + id);
+    console.log(`Added item w/ id:${id}`);
   }
 
   createOrder() {
