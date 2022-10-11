@@ -3,9 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { UserModel } from '../models/user.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { HOST } from '../conf';
-
-const baseUrl = HOST + '/auth/';
+import { environment } from '../../environments/environment';
+const baseUrl = environment.HOST + '/auth/';
 
 @Injectable({
   providedIn: 'root',
@@ -100,7 +99,7 @@ export class LoginService {
 
   private register(username: string, password: string, email: string, apiUrl: string) {
     let promise: any = new Promise((resolve, reject) => {
-      let url = HOST + apiUrl;
+      let url = environment.HOST + apiUrl;
       this.http
         .post(
           url,

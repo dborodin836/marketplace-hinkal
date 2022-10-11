@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { DishService } from './dish.service';
 import { HttpClient } from '@angular/common/http';
 import { LoginService } from './login.service';
-import { HOST } from '../conf';
+import { environment } from '../../environments/environment';
 
-const baseUrl = HOST + '/api/order/';
+const baseUrl = environment.HOST + '/api/order/';
 
 @Injectable({
   providedIn: 'root',

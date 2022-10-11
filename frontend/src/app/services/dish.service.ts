@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { PageEvent } from '@angular/material/paginator';
-import { HOST } from '../conf';
+import { environment } from '../../environments/environment';
 
-const baseUrl = HOST + '/api/dish/';
+const baseUrl = environment.HOST + '/api/dish/';
 
 @Injectable({
   providedIn: 'root',
