@@ -132,9 +132,13 @@ jobs:
       - name: Build containers
         run: docker-compose -f docker-compose-local.yml up -d
       - name: Test Frontend
-        run: curl --fail http://0.0.0.0:4200 || exit 1
+        run: |
+          sleep 15
+          curl --fail http://0.0.0.0:4200 || exit 1
       - name: Test Backend
-        run: curl --fail http://0.0.0.0:8000/api/dish/?format=api || exit 1
+        run: |
+          sleep 45
+          curl --fail http://0.0.0.0:8000/api/dish/?format=api || exit 1
 
   test-frontend:
     name: Testing Frontend
