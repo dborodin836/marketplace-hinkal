@@ -130,7 +130,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Build containers
-        run: docker-compose up -d
+        run: docker-compose -f .\docker-compose-local.yml up -d
       - name: Test Frontend
         run: curl --fail http://localhost:4200 || exit 1
       - name: Test Backend
