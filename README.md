@@ -9,7 +9,7 @@
   </p>
 </p>
 
-<a><img src="https://img.shields.io/codecov/c/github/dborodin836/marketplace-hinkal" alt="Codecov coverage"></a>
+[![codecov](https://codecov.io/gh/dborodin836/marketplace-hinkal/branch/develop/graph/badge.svg?token=VLZPPIYUOG)](https://codecov.io/gh/dborodin836/marketplace-hinkal)
 <img src="https://img.shields.io/github/license/dborodin836/marketplace-hinkal" alt="License">
 <img src="https://img.shields.io/github/checks-status/dborodin836/marketplace-hinkal/develop" alt="Checks">
 <img src="https://img.shields.io/github/last-commit/dborodin836/marketplace-hinkal" alt="Last commit">
