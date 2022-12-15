@@ -101,7 +101,7 @@ jobs:
         with:
           fail_ci_if_error: true
           flags: backend
-          
+  
   lint-frontend:
     name: Frontend Linting
     runs-on: ubuntu-latest
@@ -170,4 +170,3 @@ jobs:
         with:
           fail_ci_if_error: true
           flags: frontend
-          
