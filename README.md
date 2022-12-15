@@ -9,7 +9,7 @@
   </p>
 </p>
 
-[![codecov](https://codecov.io/gh/dborodin836/marketplace-hinkal/branch/develop/graph/badge.svg?token=VLZPPIYUOG)](https://codecov.io/gh/dborodin836/marketplace-hinkal)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 <img src="https://img.shields.io/github/license/dborodin836/marketplace-hinkal" alt="License">
 <img src="https://img.shields.io/github/checks-status/dborodin836/marketplace-hinkal/develop" alt="Checks">
 <img src="https://img.shields.io/github/last-commit/dborodin836/marketplace-hinkal" alt="Last commit">
@@ -17,7 +17,12 @@
 <img src="https://img.shields.io/github/commit-activity/m/dborodin836/marketplace-hinkal" alt="Commit activity">
 <img src="https://www.codefactor.io/repository/github/dborodin836/marketplace-hinkal/badge" alt="Codefactor">
 [![DeepSource](https://deepsource.io/gh/dborodin836/marketplace-hinkal.svg/?label=active+issues&token=IHInroIWzClOi9afsigBuueu)](https://deepsource.io/gh/dborodin836/marketplace-hinkal/?ref=repository-badge)
-[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+
+
+## Coverage
+| **Backend** | **Frontend** | **Total** |
+|:---:|:---:|:---:|
+| [![codecov](https://codecov.io/gh/dborodin836/marketplace-hinkal/branch/develop/graph/badge.svg?token=VLZPPIYUOG&flag=backend)](https://codecov.io/gh/dborodin836/marketplace-hinkal) | [![codecov](https://codecov.io/gh/dborodin836/marketplace-hinkal/branch/develop/graph/badge.svg?token=VLZPPIYUOG&flag=frontend)](https://codecov.io/gh/dborodin836/marketplace-hinkal) | [![codecov](https://codecov.io/gh/dborodin836/marketplace-hinkal/branch/develop/graph/badge.svg?token=VLZPPIYUOG)](https://codecov.io/gh/dborodin836/marketplace-hinkal) |
 
 ## Table Of Contents
 
