@@ -6,8 +6,7 @@ on:
   pull_request:
     branches: [master, develop, release]
   schedule:
-    branches: [develop, release]
-    cron: '0 0 * * 1'
+    - cron: '0 0 * * 1'
 
 jobs:
   lint-backend:
